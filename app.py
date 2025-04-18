@@ -1,5 +1,5 @@
 import os
-
+from datetime import datetime
 from flask import Flask
 
 app = Flask(__name__)
@@ -22,3 +22,12 @@ def hello_world():
     <p>DB_HOST={DB_HOST}</p>
     <p>DB_PORT={DB_PORT}</p>
     """
+
+@app.route("/time")
+def get_current_time():
+    now = datetime.now()
+    return {
+        "day": now.strftime("%A"),  # Full day name (e.g., "Monday")
+        "date": now.strftime("%Y-%m-%d"),  # YYYY-MM-DD format
+        "time": now.strftime("%H:%M:%S"),  # HH:MM:SS format
+    }
